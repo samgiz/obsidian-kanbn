@@ -228,7 +228,9 @@ class KanbnBoardView extends ItemView {
     if (!this.kanbn) {
       console.log('Kanbn instance not found')
     }
-		this.root = createRoot(this.containerEl.children[1]);
+    const targetElement = this.containerEl.children[1];
+    targetElement.classList.add('kanbn-root');
+		this.root = createRoot(targetElement);
 		this.root.render(
 			<StrictMode>
 				{this.kanbn && <Board kanbn={this.kanbn} />}
