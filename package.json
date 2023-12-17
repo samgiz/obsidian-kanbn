@@ -14,6 +14,7 @@
 	"dependencies": {
 		"@basementuniverse/kanbn": "git@github.com:samgiz/kanbn.git#1536b686f8b530c5eca1cd997347f250d767951c",
 		"dateformat": "^5.0.3",
+		"lucide-react": "^0.298.0",
 		"param-case": "^3.0.4",
 		"path": "^0.12.7",
 		"react": "^18.2.0",
@@ -28,8 +29,7 @@
 		"remark-math": "^5.1.1",
 		"terser": "5.16.0",
 		"throttle-debounce": "^5.0.0",
-		"uuid": "^9.0.0",
-		"vscode-codicons": "^0.0.17"
+		"uuid": "^9.0.0"
 	},
 	"devDependencies": {
 		"@types/dateformat": "^5.0.0",

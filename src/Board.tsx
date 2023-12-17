@@ -5,6 +5,7 @@ import TaskItem from './TaskItem'
 import formatDate from 'dateformat'
 import { Kanbn } from '@basementuniverse/kanbn/src/main'
 import { paramCase } from '@basementuniverse/kanbn/src/utility'
+import { Delete, Rocket, BarChart2, Play, Check, Plus, Filter, ArrowDownNarrowWide } from 'lucide-react';
 
 const zip = (a: any[], b: any[]): Array<[any, any]> => a.map((v: any, i: number): [any, any] => [v, b[i]])
 
@@ -336,7 +337,7 @@ const Board = ({kanbn}: any): JSX.Element => {
                 onClick={filterTasks}
                 title="Filter tasks"
               >
-                <i className="codicon codicon-filter"></i>
+                <Filter className="codicon" />
               </button>
               {
                 taskFilter !== '' &&
@@ -346,7 +347,7 @@ const Board = ({kanbn}: any): JSX.Element => {
                   onClick={clearFilters}
                   title="Clear task filters"
                 >
-                  <i className="codicon codicon-clear-all"></i>
+                  <Delete className="codicon" />
                 </button>
               }
               {
@@ -365,7 +366,7 @@ const Board = ({kanbn}: any): JSX.Element => {
                       : ''
                   ].join('\n')}
                 >
-                  <i className="codicon codicon-rocket"></i>
+                  <Rocket className="codicon" />
                   {(state.currentSprint != null) ? state.currentSprint.name : 'No sprint'}
                 </button>
               }
@@ -380,7 +381,7 @@ const Board = ({kanbn}: any): JSX.Element => {
                   }}
                   title="Open burndown chart"
                 >
-                  <i className="codicon codicon-graph"></i>
+                  <BarChart2 className="codicon" />
                 </button>
               }
             </form>
@@ -409,11 +410,11 @@ const Board = ({kanbn}: any): JSX.Element => {
                 <h2 className="kanbn-column-name">
                   {
                     state.startedColumns.includes(columnName) as boolean &&
-                    <i className="codicon codicon-play"></i>
+                    <Play className="codicon" />
                   }
                   {
                     state.completedColumns.includes(columnName) as boolean &&
-                    <i className="codicon codicon-check"></i>
+                    <Check className="codicon" />
                   }
                   {columnName}
                   <span className="kanbn-column-count">{(column as any).length}</span>
@@ -428,7 +429,7 @@ const Board = ({kanbn}: any): JSX.Element => {
                       })
                     }}
                   >
-                    <i className="codicon codicon-add"></i>
+                    <Plus className="codicon" strokeWidth={2} />
                   </button>
                   {((columnIsSorted, columnSortSettings) => (
                     <button
@@ -451,7 +452,7 @@ const Board = ({kanbn}: any): JSX.Element => {
                         })
                       }}
                     >
-                      <i className="codicon codicon-list-filter"></i>
+                      <ArrowDownNarrowWide className="codicon" strokeWidth={2} />
                     </button>
                   ))(columnName in state.columnSorting, state.columnSorting[columnName] ?? [])}
                 </h2>
