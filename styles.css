@@ -257,6 +257,7 @@ body.theme-dark .kanbn-task {
 
 .kanbn-task.drag {
     border-color: var(--kanbn-active-foreground);
+    left: auto !important; top: auto !important;
 }
 
 .kanbn-task-data {
