@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
-import { DragDropContext, Droppable, DroppableProps } from 'react-beautiful-dnd'
+import { DragDropContext, Droppable } from '@hello-pangea/dnd'
 import { useEffect, useState } from 'react'
 import TaskItem from './TaskItem'
 import formatDate from 'dateformat'
@@ -7,30 +7,10 @@ import { Kanbn } from '@basementuniverse/kanbn/src/main'
 import { paramCase } from '@basementuniverse/kanbn/src/utility'
 import { Delete, Rocket, BarChart2, Play, Check, Plus, Filter, ArrowDownNarrowWide } from 'lucide-react';
 
-export const StrictModeDroppable = ({ children, ...props }: DroppableProps) => {
-  const [enabled, setEnabled] = useState(false);
-
-  useEffect(() => {
-    const animation = requestAnimationFrame(() => setEnabled(true));
-
-    return () => {
-      cancelAnimationFrame(animation);
-      setEnabled(false);
-    };
-  }, []);
-
-  if (!enabled) {
-    return null;
-  }
-
-  return <Droppable {...props}>{children}</Droppable>;
-};
-
 const zip = (a: any[], b: any[]): Array<[any, any]> => a.map((v: any, i: number): [any, any] => [v, b[i]])
 
 // Called when a task item has finished being dragged
 const onDragEnd = (result: any, columns: any, setColumns: any): void => {
-  console.log("onDragEnd called")
   // No destination means the item was dragged to an invalid location
   if (result.destination === undefined || result.destination === null) {
     return
@@ -71,12 +51,13 @@ const onDragEnd = (result: any, columns: any, setColumns: any): void => {
   }
 
   // Post a message back to the extension so we can move the task in the index
-  window.parent.postMessage({
-    command: 'kanbn.move',
-    task: removed.id,
-    columnName: destination.droppableId,
-    position: destination.index
-  })
+  // window.parent.postMessage({
+  //   command: 'kanbn.move',
+  //   task: removed.id,
+  //   columnName: destination.droppableId,
+  //   position: destination.index
+  // })
+  // TODO: Implement this
 }
 
 // Check if a task's due date is in the past
@@ -477,7 +458,7 @@ const Board = ({kanbn}: any): JSX.Element => {
                   ))(columnName in state.columnSorting, state.columnSorting[columnName] ?? [])}
                 </h2>
                 <div className="kanbn-column-task-list-container">
-                  <StrictModeDroppable droppableId={columnName} key={columnName}>
+                  <Droppable droppableId={columnName} key={columnName}>
                     {(provided, snapshot) => {
                       const isDraggingOver: boolean = snapshot.isDraggingOver
                       return (
@@ -503,7 +484,7 @@ const Board = ({kanbn}: any): JSX.Element => {
                         </div>
                       )
                     }}
-                  </StrictModeDroppable>
+                  </Droppable>
                 </div>
               </div>
             )
